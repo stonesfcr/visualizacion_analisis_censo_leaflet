@@ -1,5 +1,5 @@
 # visualizacion_analisis_censo_leaflet
-##Análisis de información Censo 2017, parte de geoportal Ilustre Municipalidad de Antofagasta
+## Análisis de información Censo 2017, parte de geoportal Ilustre Municipalidad de Antofagasta
 
 1. Población por Unidad Vecinal
 1. Población por Zona Censal
