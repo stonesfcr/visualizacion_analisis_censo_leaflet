@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CENSO 2017</title>
+        <!-- TAG MIXED REQUEST -->
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet-src.js"></script>
+        <!-- Geocoder -->
+        <link rel="stylesheet" href="css/Control.Geocoder.css" />
+        <!-- GEOLOCATE -->
+        <link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <!-- CODIGO GOOGLE API -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDArc8XSbrBtmMyMq6hC5iuXc7JBzy6RDE" async defer></script>
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <!-- GOOGLEFONT -->
+        <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <link rel="stylesheet" href="css/stport.css"/>
+	</head>
+	<body>
+		<div id="sideinfo_02">
+            <div id="logima2" >
+                <a href="http://www.municipalidadantofagasta.cl/" target="_blank"><img id="logo2" src="images/LogoMuni_g.png" alt="IMAlogo" /></a> 
+            </div>
+            <div id="titulo">ANALISIS CENSO INE 2017</div>
+            <div id="subtit" >Seleccionar capas para visualizar</div>
+            <div id="menucapas" style="margin-top: 20px; vertical-align:middle; text-align: center;">
+                <div id="subtit" >DATOS POR ZONA</div>
+                <button id="boton2" class="pob_uv" type="button">POBLACIÓN POR UNIDAD VECINAL</button>
+                    <div id="bott" class="pouv" style="display:none;" >
+                        Habitantes por Unidad Vecinal<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/UV_Hab920217_4_2618240.png" /></td>
+                                <td id="td2"> 26 - 1824 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/UV_Hab920217_4_182434831.png" /></td>
+                                <td> 1824 - 3483 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/UV_Hab920217_4_348354922.png" /></td>
+                                <td> 3483 - 5492 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/UV_Hab920217_4_549284713.png" /></td>
+                                <td> 5492 - 8471 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/UV_Hab920217_4_8471166394.png" /></td><td> 8471 - 16639 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/UV_Hab920217_4_16639333955.png" /></td>
+                                <td> 16639 - 33395 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <button id="boton2" class="zc_pob" type="button">POBLACIÓN POR ZONA CENSAL</button>
+                    <div id="bott" class="cenpob" style="display:none;">
+                        Población Censo 2017<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/ZonaCensal_Join_Pob_2_157827530.png" /></td>
+                                <td id="td2"> 1578 - 2753 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_Pob_2_275338141.png" /></td>
+                                <td> 2753 - 3814 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_Pob_2_381451392.png" /></td>
+                                <td> 3814 - 5139 </td></tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_Pob_2_513964873.png" /></td>
+                                <td> 5139 - 6487 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_Pob_2_648784144.png" /></td>
+                                <td> 6487 - 8414 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <button id="boton2" class="zc_viv" type="button">NUMERO DE VIVIENDAS POR ZONA CENSAL</button>
+                    <div id="bott" class="cenviv" style="display:none;">
+                        Numero de Viviendas censo 2017<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/ZonaCensal_Join_VIV_1_4628200.png" /></td>
+                                <td id="td2"> 462 - 820 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_VIV_1_82011001.png" /></td>
+                                <td> 820 - 1100 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_VIV_1_110013902.png" /></td>
+                                <td> 1100 - 1390 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_VIV_1_139017833.png" /></td>
+                                <td> 1390 - 1783 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/ZonaCensal_Join_VIV_1_178322344.png" /></td>
+                                <td> 1783 - 2234 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <div id="subtit2">DATOS POR MANZANA</div>
+                <button id="boton2" class="dens_pob" type="button">DENSIDAD POBLACIÓN</button>
+                    <div id="bott" class="dpob" style="display:none; ">
+                        Densidad Población por Manzana 2017<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/Densidad_POB_MZN_2_00000001170.png" />
+                                </td>
+                                <td id="td2"> 0.0000 - 0.0117 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Densidad_POB_MZN_2_00117001771.png" /></td>
+                                <td> 0.0117 - 0.0177 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Densidad_POB_MZN_2_00177002322.png" /></td>
+                                <td> 0.0177 - 0.0232 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Densidad_POB_MZN_2_00232003233.png" /></td>
+                                <td> 0.0232 - 0.0323 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Densidad_POB_MZN_2_00323021254.png" /></td>
+                                <td> 0.0323 - 0.2125 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <button id="boton2" class="hab_viv" type="button">HABITANTES POR VIVIENDA</button>
+                    <div id="bott" class="habvi" style="display:none; ">
+                        Cantidad de Habitantes por Vivienda Promedio<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/HABxVIV_3_0002940.png" /></td>
+                                <td id="td2"> 0.00 - 2.94 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/HABxVIV_3_2943451.png" /></td>
+                                <td> 2.94 - 3.45 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/HABxVIV_3_3454002.png" /></td>
+                                <td> 3.45 - 4.00 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/HABxVIV_3_40021423.png" /></td>
+                                <td> 4.00 - 21.42 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <button id="boton2" class="mat_acep" type="button">MATERIALIDAD ACEPTABLE</button>
+                    <div id="bott" class="macep" style="display:none; ">
+                       Porcentaje de Materialidad Aceptable<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/MaterialidadAceptable_1_0801004.png" /></td>
+                                <td id="td2"> 0.00 - 0.20 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/MaterialidadAceptable_1_0600803.png" /></td>
+                                <td> 0.20 - 0.40 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/MaterialidadAceptable_1_0400602.png" /></td>
+                                <td> 0.40 - 0.60 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/MaterialidadAceptable_1_0200401.png" /></td>
+                                <td> 0.60 - 0.80 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/MaterialidadAceptable_1_0000200.png" /></td>
+                                <td> 0.80 - 1.00 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <button id="boton2" class="gs_inm" type="button">INDICE DE INMIGRACIÓN</button>
+                    <div id="bott" class="inm" style="display:none;">
+                        Porcentaje Inmigrantes por Manzana<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/Inmigrantes_0_0000240.png" /></td>
+                                <td id="td2"> 0.00 - 0.24 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Inmigrantes_0_0240491.png" /></td>
+                                <td> 0.24 - 0.49 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Inmigrantes_0_0490732.png" /></td>
+                                <td> 0.49 - 0.73 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/Inmigrantes_0_0730973.png" /></td>
+                                <td> 0.73 - 0.97 </td>
+                            </tr>
+                        </table>
+                    </div>
+                <button id="boton2" class="gs_puor" type="button">INDICE DE PUEBLOS ORIGINARIOS</button>
+                    <div id="bott" class="puor" style="display:none;">
+                        Porcentaje de Miembros de Pueblos Originarios por Manzana<br />
+                        <table id="menutab1">
+                            <tr>
+                                <td id="td1"><img src="legend/PueblosOrig_0_000000720.png" /></td>
+                                <td id="td2"> 0.000 - 0.072 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/PueblosOrig_0_007201691.png" /></td>
+                                <td> 0.072 - 0.169 </td>
+                            </tr>
+                            <tr>
+                                <td><img src="legend/PueblosOrig_0_016908462.png" /></td>
+                                <td> 0.169 - 0.846 </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                <a href="http://www.censo2017.cl/" target="_blank"><img src="http://www.censo2017.cl/wp-content/uploads/2016/01/logo-2.png" style="margin-top:15px;" height=80px alt="CENSO_INE"/></a>
+            </div>
+            
+            </div>
+        </div>
+        <div id="bottom">
+                    <a href="index.html">Volver</a>
+        </div>
+
+		<div id="map_02"></div>
+
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/Control.Geocoder.js"></script>
+        <script type="text/javascript" src="js/Leaflet.GoogleMutant.js"></script>
+        <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+        
+        <script src="js/mapa_cen.js"></script>
+
+        <script type="text/javascript">
+            $('.pob_uv').click(function(){
+                $('.pouv').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.zc_pob').click(function(){
+                $('.cenpob').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.zc_viv').click(function(){
+                $('.cenviv').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.dens_pob').click(function(){
+                $('.dpob').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.hab_viv').click(function(){
+                $('.habvi').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.mat_acep').click(function(){
+                $('.macep').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.mat_rec').click(function(){
+                $('.marec').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.gs_inm').click(function(){
+                $('.inm').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+            $('.gs_puor').click(function(){
+                $('.puor').toggle(50);
+                if($(this).attr('att') == 0){
+                    this.setAttribute("style","background-color:#0e4578red");
+                    $(this).attr('att',1);
+                } else {
+                    this.setAttribute("style","background-color:rgb(153,0,18)");
+                    $(this).attr('att',0);
+                }
+              });
+        </script>
+	</body>
+</html>
